@@ -20,16 +20,16 @@
 
 const int MOTOR_PWM_PIN[QUANTITY_MOTORS] = {6,3,9,5};
 const int MOTOR_DIR_1[QUANTITY_MOTORS] = { // 2,1,0,5
+  0b00100000,
+  0b01000000,
+  0b10000000,
   0b00000100,
-  0b00000010,
-  0b00000001,
-  0b00100000
 };
 const int MOTOR_DIR_2[QUANTITY_MOTORS] = { // 3,4,7,6
-  0b00001000,
   0b00010000,
-  0b10000000,
-  0b01000000
+  0b00001000,
+  0b00000001,
+  0b00000010,
 };
 
 class BTS7960_PRO {
@@ -77,7 +77,7 @@ class BTS7960_PRO {
     bool block[QUANTITY_MOTORS];
     void runBasic(int number, int speed=0, bool block=0, bool update=1) {
       if (number<1 || number>QUANTITY_MOTORS) return;
-      BTS7960_PRO::speed[number-1] = constrain(speed,-100,100)*2.5*int(!block);
+      BTS7960_PRO::speed[number-1] = constrain(speed,-100,100)*2.55*int(!block);
       BTS7960_PRO::block[number-1] = block;
       if (update) BTS7960_PRO::update();
     }
